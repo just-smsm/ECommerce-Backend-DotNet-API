@@ -142,24 +142,27 @@ namespace Ecommerce_platforms.Repository.Repository
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<CartItem>> GetCartItem(string email)
+        public async Task<IEnumerable<CartItem>> GetCartItemsByEmail(string email)
         {
-            var cart = await _context.Carts.Include(c => c.Items).FirstOrDefaultAsync(i => i.Email == email);
-            if (cart != null)
+            if (string.IsNullOrEmpty(email))
+                return new List<CartItem>(); // Always return an empty list if email is invalid
+
+            var cart = await _context.Carts
+                .Include(c => c.Items)
+                .FirstOrDefaultAsync(c => c.Email == email);
+
+            if (cart?.Items == null || !cart.Items.Any())
+                return new List<CartItem>(); // Return an empty list if cart or items are null
+
+            return cart.Items.Select(item => new CartItem
             {
-                if (cart.Items == null)
-                {
-                    return Enumerable.Empty<CartItem>();
-                }
-                else
-                {
-                    return cart.Items;
-                }
-            }
-            return Enumerable.Empty<CartItem>();
+                PictureUrl = $"https://localhost:7070{item.PictureUrl}",
+                Price = item.Price,
+                Quantity = item.Quantity,
+                ProductId = item.ProductId,
+                ProductName = item.ProductName
+            }).ToList();
         }
-
-
         public async Task<Cart> UpdateProductQuantity(string email, int productId, int quantity)
         {
             var cart = await _context.Carts.Include(c => c.Items).FirstOrDefaultAsync(c => c.Email == email);

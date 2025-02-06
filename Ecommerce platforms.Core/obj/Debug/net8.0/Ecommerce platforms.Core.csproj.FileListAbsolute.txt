@@ -11,3 +11,16 @@ C:\Users\alQsa\source\repos\Ecommerce platforms\Ecommerce platforms.Core\obj\Deb
 C:\Users\alQsa\source\repos\Ecommerce platforms\Ecommerce platforms.Core\obj\Debug\net8.0\refint\Ecommerce platforms.Core.dll
 C:\Users\alQsa\source\repos\Ecommerce platforms\Ecommerce platforms.Core\obj\Debug\net8.0\Ecommerce platforms.Core.pdb
 C:\Users\alQsa\source\repos\Ecommerce platforms\Ecommerce platforms.Core\obj\Debug\net8.0\ref\Ecommerce platforms.Core.dll
+C:\Users\alQsa\source\Ecommerce\Ecommerce platforms\Ecommerce platforms.Core\bin\Debug\net8.0\Ecommerce platforms.Core.deps.json
+C:\Users\alQsa\source\Ecommerce\Ecommerce platforms\Ecommerce platforms.Core\bin\Debug\net8.0\Ecommerce platforms.Core.dll
+C:\Users\alQsa\source\Ecommerce\Ecommerce platforms\Ecommerce platforms.Core\bin\Debug\net8.0\Ecommerce platforms.Core.pdb
+C:\Users\alQsa\source\Ecommerce\Ecommerce platforms\Ecommerce platforms.Core\obj\Debug\net8.0\Ecommerce platforms.Core.csproj.AssemblyReference.cache
+C:\Users\alQsa\source\Ecommerce\Ecommerce platforms\Ecommerce platforms.Core\obj\Debug\net8.0\Ecommerce platforms.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\alQsa\source\Ecommerce\Ecommerce platforms\Ecommerce platforms.Core\obj\Debug\net8.0\Ecommerce platforms.Core.AssemblyInfoInputs.cache
+C:\Users\alQsa\source\Ecommerce\Ecommerce platforms\Ecommerce platforms.Core\obj\Debug\net8.0\Ecommerce platforms.Core.AssemblyInfo.cs
+C:\Users\alQsa\source\Ecommerce\Ecommerce platforms\Ecommerce platforms.Core\obj\Debug\net8.0\Ecommerce platforms.Core.csproj.CoreCompileInputs.cache
+C:\Users\alQsa\source\Ecommerce\Ecommerce platforms\Ecommerce platforms.Core\obj\Debug\net8.0\Ecommerce platforms.Core.sourcelink.json
+C:\Users\alQsa\source\Ecommerce\Ecommerce platforms\Ecommerce platforms.Core\obj\Debug\net8.0\Ecommerce platforms.Core.dll
+C:\Users\alQsa\source\Ecommerce\Ecommerce platforms\Ecommerce platforms.Core\obj\Debug\net8.0\refint\Ecommerce platforms.Core.dll
+C:\Users\alQsa\source\Ecommerce\Ecommerce platforms\Ecommerce platforms.Core\obj\Debug\net8.0\Ecommerce platforms.Core.pdb
+C:\Users\alQsa\source\Ecommerce\Ecommerce platforms\Ecommerce platforms.Core\obj\Debug\net8.0\ref\Ecommerce platforms.Core.dll

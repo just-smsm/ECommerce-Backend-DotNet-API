@@ -25,24 +25,25 @@ namespace Ecommerce_platforms.Repository.Auth
             if (user == null) throw new ArgumentNullException(nameof(user));
             if (userManager == null) throw new ArgumentNullException(nameof(userManager));
 
-            // Prepare a list of claims
+            // ✅ Prepare a list of claims including "UserId"
             var authClaims = new List<Claim>
             {
+                new Claim("UserId", user.Id),  // ✅ Use "UserId" instead of ClaimTypes.NameIdentifier
                 new Claim(ClaimTypes.Name, user.UserName ?? string.Empty),
                 new Claim(ClaimTypes.Email, user.Email ?? string.Empty)
             };
 
-            // Fetch user roles and add them to the claims list
+            // ✅ Fetch user roles and add them to the claims list
             var userRoles = await userManager.GetRolesAsync(user);
             foreach (var role in userRoles)
             {
                 authClaims.Add(new Claim(ClaimTypes.Role, role));
             }
 
-            // Generate the security key
+            // ✅ Generate the security key
             var authKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:SecretKey"]));
 
-            // Create the token descriptor
+            // ✅ Create the token descriptor
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Audience = _configuration["JWT:ValidAudience"],
@@ -55,7 +56,7 @@ namespace Ecommerce_platforms.Repository.Auth
             var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
-            // Return the serialized token
+            // ✅ Return the serialized token (including "UserId")
             return tokenHandler.WriteToken(token);
         }
     }

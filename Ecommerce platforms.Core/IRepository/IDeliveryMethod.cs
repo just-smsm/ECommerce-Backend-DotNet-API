@@ -10,5 +10,6 @@ namespace Ecommerce_platforms.Core.IRepository
 {
     public interface IDeliveryMethod : IGenericRepository<DeliveryMethod>
     {
+        public Task<DeliveryMethod> GetDeliveryMethodAsync(int deliveryMethodId);
     }
 }

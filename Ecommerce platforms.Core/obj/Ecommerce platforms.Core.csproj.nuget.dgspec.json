@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.Core\\Ecommerce platforms.Core.csproj": {}
+    "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.Core\\Ecommerce platforms.Core.csproj": {}
   },
   "projects": {
-    "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.Core\\Ecommerce platforms.Core.csproj": {
+    "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.Core\\Ecommerce platforms.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.Core\\Ecommerce platforms.Core.csproj",
+        "projectUniqueName": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.Core\\Ecommerce platforms.Core.csproj",
         "projectName": "Ecommerce platforms.Core",
-        "projectPath": "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.Core\\Ecommerce platforms.Core.csproj",
+        "projectPath": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.Core\\Ecommerce platforms.Core.csproj",
         "packagesPath": "C:\\Users\\alQsa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.Core\\obj\\",
+        "outputPath": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

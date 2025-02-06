@@ -10,5 +10,7 @@ namespace Ecommerce_platforms.Core.IRepository
 {
     public interface IBrand:IGenericRepository<Brand>
     {
+        public Task<string> GetBrandNameByBrandID(int brandID);
+       
     }
 }

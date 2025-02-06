@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZhnyRScrIr4=",
+  "dgSpecHash": "ccfKUm15ERE=",
   "success": true,
-  "projectFilePath": "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.API\\Ecommerce platforms.API.csproj",
+  "projectFilePath": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\Ecommerce platforms.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\alQsa\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\alQsa\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",

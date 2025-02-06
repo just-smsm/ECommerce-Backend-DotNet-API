@@ -4,6 +4,10 @@ using Ecommerce_platforms.Repository.Data.Identity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Threading.Tasks;
+using System;
 
 namespace Ecommerce_platforms.API.Controllers
 {
@@ -14,6 +18,7 @@ namespace Ecommerce_platforms.API.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly IImageService _imageService;
         private readonly SignInManager<AppUser> _signInManager;
+
         public ProfileController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IImageService imageService)
         {
             _userManager = userManager;
@@ -21,86 +26,175 @@ namespace Ecommerce_platforms.API.Controllers
             _signInManager = signInManager;
         }
 
-        [HttpPost("change-password")]
-        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordDTO changePasswordDto)
+        // ✅ Get User Profile
+        [HttpGet("profile")]
+        public async Task<IActionResult> GetProfile([FromHeader(Name = "Authorization")] string authorizationHeader)
         {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
+            var user = await GetAuthenticatedUserAsync(authorizationHeader);
+            if (user == null)
+                return Unauthorized(new { Message = "User not found or not authenticated." });
 
-            var user = await _userManager.FindByEmailAsync(changePasswordDto.Email);
-            if (user == null) return NotFound("User not found.");
+            var role = (await _userManager.GetRolesAsync(user)).FirstOrDefault();
+            string profileImageUrl = string.IsNullOrEmpty(user.ProfileImageUrl) ? null : $"https://localhost:7070/{user.ProfileImageUrl}";
 
-            var result = await _userManager.ChangePasswordAsync(user, changePasswordDto.CurrentPassword, changePasswordDto.NewPassword);
-            if (!result.Succeeded) return BadRequest(result.Errors);
-
-            return Ok("Password has been changed successfully.");
+            return Ok(new
+            {
+                user.FName,
+                user.LName,
+                user.Email,
+                user.PhoneNumber,
+                ProfileImageUrl = profileImageUrl ?? "null",
+                RoleName = role
+            });
         }
 
+        // ✅ Change Password
+        [HttpPost("change-password")]
+        public async Task<IActionResult> ChangePassword(
+            [FromHeader(Name = "Authorization")] string authorizationHeader,
+            [FromBody] ChangePasswordDTO changePasswordDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(new { Message = "Invalid password format." });
+
+            var user = await GetAuthenticatedUserAsync(authorizationHeader);
+            if (user == null)
+                return Unauthorized(new { Message = "User not found or not authenticated." });
+
+            var result = await _userManager.ChangePasswordAsync(user, changePasswordDto.CurrentPassword, changePasswordDto.NewPassword);
+            return result.Succeeded ? Ok(new { Message = "Password changed successfully." }) : BadRequest(result.Errors);
+        }
+
+        // ✅ Reset Password
         [HttpPost("reset-password")]
         public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDTO resetPasswordDto)
         {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
             var user = await _userManager.FindByEmailAsync(resetPasswordDto.Email);
-            if (user == null) return NotFound("User not found.");
+            if (user == null)
+                return NotFound(new { Message = "User not found." });
 
             var result = await _userManager.ResetPasswordAsync(user, resetPasswordDto.Token, resetPasswordDto.NewPassword);
-            if (!result.Succeeded) return BadRequest(result.Errors);
-
-            return Ok("Password has been reset successfully.");
+            return result.Succeeded ? Ok(new { Message = "Password reset successfully." }) : BadRequest(result.Errors);
         }
 
+        // ✅ Upload Profile Image
         [HttpPost("upload-profile-image")]
-        public async Task<IActionResult> UploadProfileImage(IFormFile file)
+        public async Task<IActionResult> UploadProfileImage(
+            [FromHeader(Name = "Authorization")] string authorizationHeader,
+            IFormFile file)
         {
-            if (file == null || file.Length == 0) return BadRequest("No file provided.");
+            if (file == null || file.Length == 0)
+                return BadRequest(new { Message = "No file provided." });
 
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null) return NotFound("User not found.");
+            if (!IsValidImage(file))
+                return BadRequest(new { Message = "Invalid file type or size. Only JPG, JPEG, PNG, and GIF are allowed (Max: 5MB)." });
+
+            var user = await GetAuthenticatedUserAsync(authorizationHeader);
+            if (user == null)
+                return Unauthorized(new { Message = "User not found or not authenticated." });
 
             try
             {
-                var imageUrl = await _imageService.SaveImageAsync(file);
-                user.ProfileImageUrl = imageUrl;
+                if (!string.IsNullOrEmpty(user.ProfileImageUrl))
+                    await _imageService.DeleteImageAsync(user.ProfileImageUrl);
 
+                user.ProfileImageUrl = await _imageService.SaveImageAsync(file);
                 var result = await _userManager.UpdateAsync(user);
-                if (!result.Succeeded) return BadRequest(result.Errors);
 
-                return Ok(new { imageUrl });
+                return result.Succeeded ? Ok(new { Message = "Image uploaded successfully." }) : BadRequest(result.Errors);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "Failed to upload image. Please try again." });
+            }
+        }
+
+        [HttpDelete("delete-profile-image")]
+        public async Task<IActionResult> DeleteProfileImage([FromHeader(Name = "Authorization")] string authorizationHeader)
+        {
+            var user = await GetAuthenticatedUserAsync(authorizationHeader);
+            if (user == null)
+                return Unauthorized(new { Message = "User not found or not authenticated." });
+
+            if (string.IsNullOrEmpty(user.ProfileImageUrl))
+                return BadRequest(new { Message = "No profile image found to delete." });
+
+            try
+            {
+                Console.WriteLine($"Attempting to delete image: {user.ProfileImageUrl}");
+
+                var isDeleted = await _imageService.DeleteImageAsync(user.ProfileImageUrl);
+                if (!isDeleted)
+                {
+                    Console.WriteLine("File deletion failed! File might not exist or has permission issues.");
+                    return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "Failed to delete image from storage." });
+                }
+
+                user.ProfileImageUrl = null;
+                var result = await _userManager.UpdateAsync(user);
+
+                return result.Succeeded ? Ok(new { Message = "Profile image deleted successfully." }) : BadRequest(result.Errors);
             }
             catch (Exception ex)
             {
-                // Log error (optional) and return an error response
-                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while uploading the image.");
+                Console.WriteLine($"Error in DeleteProfileImage: {ex.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "An error occurred while deleting the image." });
             }
         }
 
+        // ✅ Update Profile
         [HttpPost("update-profile")]
-        public async Task<IActionResult> UpdateProfile([FromBody] UpdateProfileDTO updateProfileDto)
+        public async Task<IActionResult> UpdateProfile(
+            [FromHeader(Name = "Authorization")] string authorizationHeader,
+            [FromBody] UpdateProfileDTO updateProfileDto)
         {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-            // Find the user by email
-            var user = await _userManager.FindByEmailAsync(updateProfileDto.Email);
-            if (user == null) return NotFound("User not found.");
+            var user = await GetAuthenticatedUserAsync(authorizationHeader);
+            if (user == null)
+                return Unauthorized(new { Message = "User not found or not authenticated." });
 
-            // Check if the password is correct
-            var passwordCheck = await _signInManager.CheckPasswordSignInAsync(user, updateProfileDto.Password, lockoutOnFailure: false);
-            if (!passwordCheck.Succeeded) return Unauthorized("Invalid password.");
+            var passwordCheck = await _signInManager.CheckPasswordSignInAsync(user, updateProfileDto.Password, false);
+            if (!passwordCheck.Succeeded)
+                return Unauthorized(new { Message = "Invalid password." });
 
-            // Map DTO fields to the user entity for profile update
             user.FName = updateProfileDto.FName;
             user.LName = updateProfileDto.LName;
-            user.Country = updateProfileDto.Country;
-            user.City = updateProfileDto.City;
-            user.Street = updateProfileDto.Street;
             user.PhoneNumber = updateProfileDto.PhoneNumber;
 
-            // Update the user profile
             var result = await _userManager.UpdateAsync(user);
-            if (!result.Succeeded) return BadRequest(result.Errors);
-
-            return Ok("Profile updated successfully.");
+            return result.Succeeded ? Ok(new { Message = "Profile updated successfully." }) : BadRequest(result.Errors);
         }
 
+        // ✅ Helper Methods
+        private async Task<AppUser> GetAuthenticatedUserAsync(string authorizationHeader)
+        {
+            var userId = GetUserIdFromToken(authorizationHeader);
+            return string.IsNullOrEmpty(userId) ? null : await _userManager.FindByIdAsync(userId);
+        }
+
+        private string GetUserIdFromToken(string authorizationHeader)
+        {
+            if (string.IsNullOrEmpty(authorizationHeader) || !authorizationHeader.StartsWith("Bearer "))
+                return null;
+
+            var token = authorizationHeader.Substring("Bearer ".Length);
+            var handler = new JwtSecurityTokenHandler();
+            var jwtToken = handler.ReadToken(token) as JwtSecurityToken;
+
+            return jwtToken?.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
+        }
+
+        private bool IsValidImage(IFormFile file)
+        {
+            var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+            var fileExtension = System.IO.Path.GetExtension(file.FileName).ToLower();
+
+            return allowedExtensions.Contains(fileExtension) && file.Length <= 5 * 1024 * 1024;
+        }
     }
 }

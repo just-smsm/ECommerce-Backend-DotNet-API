@@ -16,3 +16,21 @@ C:\Users\alQsa\source\repos\Ecommerce platforms\Ecommerce platforms.Repository\o
 C:\Users\alQsa\source\repos\Ecommerce platforms\Ecommerce platforms.Repository\obj\Debug\net8.0\Ecommerce platforms.Repository.pdb
 C:\Users\alQsa\source\repos\Ecommerce platforms\Ecommerce platforms.Repository\obj\Debug\net8.0\Ecommerce platforms.Repository.genruntimeconfig.cache
 C:\Users\alQsa\source\repos\Ecommerce platforms\Ecommerce platforms.Repository\obj\Debug\net8.0\ref\Ecommerce platforms.Repository.dll
+C:\Users\alQsa\source\Ecommerce\Ecommerce platforms\Ecommerce platforms.Repository\bin\Debug\net8.0\Ecommerce platforms.Repository.deps.json
+C:\Users\alQsa\source\Ecommerce\Ecommerce platforms\Ecommerce platforms.Repository\bin\Debug\net8.0\Ecommerce platforms.Repository.runtimeconfig.json
+C:\Users\alQsa\source\Ecommerce\Ecommerce platforms\Ecommerce platforms.Repository\bin\Debug\net8.0\Ecommerce platforms.Repository.dll
+C:\Users\alQsa\source\Ecommerce\Ecommerce platforms\Ecommerce platforms.Repository\bin\Debug\net8.0\Ecommerce platforms.Repository.pdb
+C:\Users\alQsa\source\Ecommerce\Ecommerce platforms\Ecommerce platforms.Repository\bin\Debug\net8.0\Ecommerce platforms.Core.dll
+C:\Users\alQsa\source\Ecommerce\Ecommerce platforms\Ecommerce platforms.Repository\bin\Debug\net8.0\Ecommerce platforms.Core.pdb
+C:\Users\alQsa\source\Ecommerce\Ecommerce platforms\Ecommerce platforms.Repository\obj\Debug\net8.0\Ecommerce platforms.Repository.csproj.AssemblyReference.cache
+C:\Users\alQsa\source\Ecommerce\Ecommerce platforms\Ecommerce platforms.Repository\obj\Debug\net8.0\Ecommerce platforms.Repository.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\alQsa\source\Ecommerce\Ecommerce platforms\Ecommerce platforms.Repository\obj\Debug\net8.0\Ecommerce platforms.Repository.AssemblyInfoInputs.cache
+C:\Users\alQsa\source\Ecommerce\Ecommerce platforms\Ecommerce platforms.Repository\obj\Debug\net8.0\Ecommerce platforms.Repository.AssemblyInfo.cs
+C:\Users\alQsa\source\Ecommerce\Ecommerce platforms\Ecommerce platforms.Repository\obj\Debug\net8.0\Ecommerce platforms.Repository.csproj.CoreCompileInputs.cache
+C:\Users\alQsa\source\Ecommerce\Ecommerce platforms\Ecommerce platforms.Repository\obj\Debug\net8.0\Ecommerce platforms.Repository.sourcelink.json
+C:\Users\alQsa\source\Ecommerce\Ecommerce platforms\Ecommerce platforms.Repository\obj\Debug\net8.0\Ecommerc.406EE8D2.Up2Date
+C:\Users\alQsa\source\Ecommerce\Ecommerce platforms\Ecommerce platforms.Repository\obj\Debug\net8.0\Ecommerce platforms.Repository.dll
+C:\Users\alQsa\source\Ecommerce\Ecommerce platforms\Ecommerce platforms.Repository\obj\Debug\net8.0\refint\Ecommerce platforms.Repository.dll
+C:\Users\alQsa\source\Ecommerce\Ecommerce platforms\Ecommerce platforms.Repository\obj\Debug\net8.0\Ecommerce platforms.Repository.pdb
+C:\Users\alQsa\source\Ecommerce\Ecommerce platforms\Ecommerce platforms.Repository\obj\Debug\net8.0\Ecommerce platforms.Repository.genruntimeconfig.cache
+C:\Users\alQsa\source\Ecommerce\Ecommerce platforms\Ecommerce platforms.Repository\obj\Debug\net8.0\ref\Ecommerce platforms.Repository.dll

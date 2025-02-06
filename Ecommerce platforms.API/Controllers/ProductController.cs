@@ -4,8 +4,12 @@ using Ecommerce_platforms.Core.IRepository;
 using Ecommerce_platforms.Core.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Ecommerce_platforms.API.Controllers
 {
@@ -24,189 +28,213 @@ namespace Ecommerce_platforms.API.Controllers
             _logger = logger;
         }
 
+        // ✅ Get all products
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductDTO>>> GetAllProducts()
         {
             try
             {
-                // Await the asynchronous operation to get the actual product list
                 var products = await _unitOfWork.Product.GetAllProductsWithPictures();
-
-                if (products == null || !products.Any())
-                {
+                if (!products.Any())
                     return NotFound("No products found.");
+
+                
+               var productDTOs = new List<ProductDTO>();
+                foreach (var product in products)
+                {
+                    var brandName = await _unitOfWork.Brand.GetBrandNameByBrandID(product.BrandId);
+                    productDTOs.Add(new ProductDTO
+                    {
+                        Id = product.Id,
+                        Name = product.Name,
+                        Description = product.Description,
+                        Price = product.Price,
+                        Count = product.Count,
+                        PictureUrl = !string.IsNullOrEmpty(product.PictureUrl) ? $"https://localhost:7070{product.PictureUrl}" : null,
+                        BrandName = brandName ?? "Unknown Brand",
+                        IsAvailable = product.Count > 0
+                    });
                 }
 
-                // Map the collection of Product entities to a collection of ProductDTO
-                var mappedProducts = _mapper.Map<IEnumerable<ProductDTO>>(products);
 
-                return Ok(mappedProducts); // Wrap the result in an ActionResult
+                return Ok(productDTOs);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "An error occurred while fetching products.");
-                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
+                _logger.LogError(ex, "Error retrieving products.");
+                return StatusCode(500, "An error occurred while retrieving products.");
             }
         }
 
+        // ✅ Get a single product by ID
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductDTO>> GetProduct(int id)
         {
             try
             {
-                // Await the asynchronous operation to get the product
                 var product = await _unitOfWork.Product.GetAllProductWithPictures(id);
-
                 if (product == null)
+                    return NotFound($"Product with ID {id} not found.");
+
+                var productDTO = new ProductDTO
                 {
-                    // Return 404 Not Found if the product does not exist
-                    return NotFound();
-                }
+                    Id = product.Id,
+                    Name = product.Name,
+                    Description = product.Description,
+                    Price = product.Price,
+                    Count = product.Count,
+                    PictureUrl = !string.IsNullOrEmpty(product.PictureUrl) ? $"https://localhost:7070{product.PictureUrl}" : null,
+                    BrandName = await _unitOfWork.Brand.GetBrandNameByBrandID(product.BrandId),
+                    
+                    IsAvailable = product.Count > 0
+                };
 
-                // Map the Product entity to ProductDTO
-                var productDto = _mapper.Map<ProductDTO>(product);
-
-                // Return the DTO with 200 OK status
-                return Ok(productDto);
+                return Ok(productDTO);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "An error occurred while fetching the product.");
-                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
+                _logger.LogError(ex, $"Error retrieving product with ID {id}.");
+                return StatusCode(500, "An error occurred while retrieving the product.");
             }
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateNew(CreateNewProductDTO NewProduct)
+        // ✅ Add a new product with an image
+        [Consumes("multipart/form-data")]
+        [HttpPost("CreateNew")]
+        public async Task<IActionResult> CreateNew([FromForm] CreateNewProductDTO newProduct)
         {
             try
             {
-                // Map the ProductDTO to Product entity
-                var product = _mapper.Map<Product>(NewProduct);
+                if (!ModelState.IsValid)
+                {
+                    Console.WriteLine("Invalid ModelState:");
+                    foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+                    {
+                        Console.WriteLine(error.ErrorMessage);
+                    }
+                    return BadRequest(ModelState);
+                }
 
-                // Perform the add operation asynchronously
+                string filePath = null;
+                if (newProduct.PictureUrl != null)
+                {
+                    filePath = await SaveImageAsync(newProduct.PictureUrl);
+                }
+
+                var product = new Product
+                {
+                    Name = newProduct.Name,
+                    Description = newProduct.Description,
+                    Price = newProduct.Price,
+                    Count = newProduct.Count,
+                    BrandId = newProduct.BrandId,
+                    PictureUrl = filePath
+                };
+
                 var createdProduct = await _unitOfWork.Product.AddAsync(product);
-
                 if (createdProduct == null)
-                {
-                    // Return 400 Bad Request if the creation failed
                     return BadRequest("Product could not be created.");
-                }
 
-                // Return 201 Created with the created product's DTO
-                var createdProductDTO = _mapper.Map<ProductDTO>(createdProduct);
-                return CreatedAtAction(nameof(GetProduct), new { id = createdProduct.Id }, createdProductDTO);
+                return CreatedAtAction(nameof(GetProduct), new { id = createdProduct.Id }, _mapper.Map<ProductDTO>(createdProduct));
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "An error occurred while creating the product.");
-                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
+                _logger.LogError(ex, "Error creating product.");
+                return StatusCode(500, "An error occurred while creating the product.");
             }
         }
 
-        [HttpPut]
-        public async Task<ActionResult<ProductDTO>> UpdateProduct(ProductDTO productDTO)
+        // ✅ Update an existing product
+        [HttpPut("{id}")]
+        [Consumes("multipart/form-data")]
+        public async Task<ActionResult<ProductDTO>> UpdateProduct(int id, [FromForm] UpdateProductDTO updatedProduct)
         {
             try
             {
-                // Map the ProductDTO to Product entity
-                var productToUpdate = _mapper.Map<Product>(productDTO);
+                var existingProduct = await _unitOfWork.Product.GetByIdAsync(id);
+                if (existingProduct == null)
+                    return NotFound($"Product with ID {id} not found.");
 
-                // Perform the update operation asynchronously
-                var updatedProduct = await _unitOfWork.Product.UpdateAsync(productToUpdate);
-
-                if (updatedProduct == null)
+                // ✅ Only update the picture if a new file is uploaded
+                if (updatedProduct.PictureUrl != null)
                 {
-                    // Return 404 Not Found if the update failed or the product does not exist
-                    return NotFound();
+                    if (!string.IsNullOrEmpty(existingProduct.PictureUrl))
+                    {
+                        DeleteImage(existingProduct.PictureUrl);
+                    }
+
+                    string filePath = await SaveImageAsync(updatedProduct.PictureUrl);
+                    existingProduct.PictureUrl = filePath;
                 }
 
-                // Map the updated Product entity back to ProductDTO
-                var updatedProductDTO = _mapper.Map<ProductDTO>(updatedProduct);
+                // ✅ Update other fields
+                existingProduct.Name = updatedProduct.Name;
+                existingProduct.Description = updatedProduct.Description;
+                existingProduct.Price = updatedProduct.Price;
+                existingProduct.Count = updatedProduct.Count;
+                existingProduct.BrandId = updatedProduct.BrandId;
 
-                // Return the updated ProductDTO with 200 OK status
-                return Ok(updatedProductDTO);
+                var result = await _unitOfWork.Product.UpdateAsync(existingProduct);
+                if (result == null)
+                    return BadRequest("Error while updating product.");
+
+                return Ok(_mapper.Map<ProductDTO>(result));
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "An error occurred while updating the product.");
-                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
+                _logger.LogError(ex, $"Error updating product with ID {id}.");
+                return StatusCode(500, "An error occurred while updating the product.");
             }
         }
 
+        // ✅ Delete a product
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
             try
             {
-                // Perform the get operation asynchronously
                 var product = await _unitOfWork.Product.GetByIdAsync(id);
-
                 if (product == null)
+                    return NotFound($"Product with ID {id} not found.");
+
+                if (!string.IsNullOrEmpty(product.PictureUrl))
                 {
-                    // Return 404 Not Found if the product does not exist
-                    return NotFound();
+                    DeleteImage(product.PictureUrl);
                 }
 
-                // Perform the delete operation asynchronously
-                var deleted = await _unitOfWork.Product.DeleteAsync(product.Id);
-
-                if (!deleted)
-                {
-                    // Return 500 Internal Server Error if the deletion failed
-                    return StatusCode(StatusCodes.Status500InternalServerError, "Error deleting the product.");
-                }
-
-                // Return 200 OK with a success message
-                return Ok(new { message = "Product deleted successfully" });
+                await _unitOfWork.Product.DeleteAsync(id);
+                return NoContent();
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "An error occurred while deleting the product.");
-                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
+                _logger.LogError(ex, $"Error deleting product with ID {id}.");
+                return StatusCode(500, "An error occurred while deleting the product.");
             }
         }
 
-        private string GetTokenFromHeader(string authorizationHeader)
+        // ✅ Helper method to save images
+        private async Task<string> SaveImageAsync(IFormFile picture)
         {
-            if (string.IsNullOrEmpty(authorizationHeader) || !authorizationHeader.StartsWith("Bearer "))
+            var uploadsFolder = Path.Combine("wwwroot/images/Products");
+            Directory.CreateDirectory(uploadsFolder);
+
+            string fileName = $"{Guid.NewGuid()}{Path.GetExtension(picture.FileName)}";
+            string filePath = Path.Combine(uploadsFolder, fileName);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
             {
-                return null;
+                await picture.CopyToAsync(stream);
             }
 
-            return authorizationHeader.Substring("Bearer ".Length).Trim();
+            return $"/images/Products/{fileName}";
         }
 
-        private string GetEmailFromToken(string token)
+        private void DeleteImage(string filePath)
         {
-            try
+            string fullPath = Path.Combine("wwwroot", filePath.TrimStart('/'));
+            if (System.IO.File.Exists(fullPath))
             {
-                var handler = new JwtSecurityTokenHandler();
-                if (!handler.CanReadToken(token))
-                {
-                    _logger.LogWarning("Cannot read token: {token}", token);
-                    return null;
-                }
-
-                var jwtToken = handler.ReadJwtToken(token);
-
-                if (jwtToken == null)
-                {
-                    _logger.LogWarning("Invalid token: {token}", token);
-                    return null;
-                }
-
-                var emailClaim = jwtToken.Claims.FirstOrDefault(c =>
-                    c.Type == ClaimTypes.Email ||
-                    c.Type == "email" ||
-                    c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress");
-
-                return emailClaim?.Value;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error parsing token");
-                return null;
+                System.IO.File.Delete(fullPath);
             }
         }
     }

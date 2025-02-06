@@ -4504,11 +4504,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.API\\Ecommerce platforms.API.csproj",
+      "projectUniqueName": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\Ecommerce platforms.API.csproj",
       "projectName": "Ecommerce platforms.API",
-      "projectPath": "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.API\\Ecommerce platforms.API.csproj",
+      "projectPath": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\Ecommerce platforms.API.csproj",
       "packagesPath": "C:\\Users\\alQsa\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.API\\obj\\",
+      "outputPath": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -4530,11 +4530,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.Core\\Ecommerce platforms.Core.csproj": {
-              "projectPath": "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.Core\\Ecommerce platforms.Core.csproj"
+            "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.Core\\Ecommerce platforms.Core.csproj": {
+              "projectPath": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.Core\\Ecommerce platforms.Core.csproj"
             },
-            "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.Repository\\Ecommerce platforms.Repository.csproj": {
-              "projectPath": "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.Repository\\Ecommerce platforms.Repository.csproj"
+            "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.Repository\\Ecommerce platforms.Repository.csproj": {
+              "projectPath": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.Repository\\Ecommerce platforms.Repository.csproj"
             }
           }
         }

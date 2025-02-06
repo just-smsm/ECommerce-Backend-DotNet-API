@@ -27,5 +27,10 @@ namespace Ecommerce_platforms.Repository.Repository
         {
             return await _context.Products.Include(p=>p.Brand).FirstOrDefaultAsync(i=>i.Id==id);
         }
+
+        public async Task<ICollection<Product>> productsOnspecificBrands(int brandID)
+        {
+            return await _context.Products.Where(p=>p.BrandId==brandID).ToListAsync();
+        }
     }
 }

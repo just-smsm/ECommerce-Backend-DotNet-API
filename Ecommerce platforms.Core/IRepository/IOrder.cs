@@ -9,5 +9,6 @@ namespace Ecommerce_platforms.Core.IRepository
         Task<List<Order>> GetAllOrdersWithPendingDeliveryAsync();
         Task<Order> DeliverOrder(int orderId, int? deliveryMethodId); 
         Task<List<Order>> GetAllOrdersWithDeliveryAsync();
+        Task<Order> GetOrderWithOrderItems(int orderId);
     }
 }

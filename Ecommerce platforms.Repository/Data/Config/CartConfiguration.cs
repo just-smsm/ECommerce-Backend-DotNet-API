@@ -12,10 +12,7 @@ namespace Ecommerce_platforms.Repository.Data.Config
     {
         public void Configure(EntityTypeBuilder<Cart> builder)
         {
-            builder.OwnsOne(o => o.ShippingAddress, sa =>
-            {
-                sa.WithOwner();
-            });
+           
         }
     }
 }

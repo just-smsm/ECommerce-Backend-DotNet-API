@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "eNGOdpF9P/0=",
+  "dgSpecHash": "U+5sFQuhwxw=",
   "success": true,
-  "projectFilePath": "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.Core\\Ecommerce platforms.Core.csproj",
+  "projectFilePath": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.Core\\Ecommerce platforms.Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\alQsa\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",
     "C:\\Users\\alQsa\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.1\\microsoft.extensions.primitives.5.0.1.nupkg.sha512",

@@ -43,10 +43,29 @@ namespace Ecommerce_platforms.API
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            builder.Services.AddIdentity<AppUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
+            // ? Configuring Identity with Strong Password Policy
+            builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+            {
+                // Password Strength Policy
+                options.Password.RequireDigit = true;             // Must contain a number
+                options.Password.RequireLowercase = true;         // Must contain a lowercase letter
+                options.Password.RequireUppercase = true;         // Must contain an uppercase letter
+                options.Password.RequireNonAlphanumeric = true;   // Must contain a special character
+                options.Password.RequiredLength = 8;              // Minimum length
+                options.Password.RequiredUniqueChars = 1;         // Minimum number of unique characters
 
+                // Lockout Policy (Optional)
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);  // Lockout time
+                options.Lockout.MaxFailedAccessAttempts = 5;  // Lockout after 5 failed attempts
+                options.Lockout.AllowedForNewUsers = true;
+
+                // User Policy
+                options.User.RequireUniqueEmail = true;
+            })
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
+
+            // ? JWT Authentication Configuration
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -64,6 +83,7 @@ namespace Ecommerce_platforms.API
                     };
                 });
 
+            // ? Authorization Policies
             builder.Services.AddAuthorization(options =>
             {
                 options.AddPolicy("AdminOrSubAdmin", policy => policy.RequireClaim("role", "Admin", "SubAdmin"));
@@ -73,16 +93,18 @@ namespace Ecommerce_platforms.API
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+            // ? CORS Configuration
             builder.Services.AddCors(options =>
                 options.AddPolicy("AllowAll", policy =>
                     policy.AllowAnyOrigin()
                           .AllowAnyMethod()
                           .AllowAnyHeader()));
 
+            // ? Swagger Configuration
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Ecommerce platforms API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Ecommerce Platforms API", Version = "v1" });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Name = "Authorization",
@@ -108,6 +130,7 @@ namespace Ecommerce_platforms.API
                 });
             });
 
+            // ? Dependency Injection for Services & Repositories
             builder.Services.AddScoped<IAuth, Auth>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<ICart, CartRepository>();
@@ -117,6 +140,7 @@ namespace Ecommerce_platforms.API
             builder.Services.AddScoped<IDeliveryMethod, DeliveryMethodRepository>();
             builder.Services.AddScoped<IOrder, OrderRepository>();
 
+            // ? Stripe Configuration
             StripeConfiguration.ApiKey = builder.Configuration["StripeSettings:SecretKey"];
         }
 

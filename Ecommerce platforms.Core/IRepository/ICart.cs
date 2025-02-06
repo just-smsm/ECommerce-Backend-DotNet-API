@@ -14,7 +14,7 @@ namespace Ecommerce_platforms.Core.IRepository
         public Task<Cart> DeleteCartProduct(string email, int productId);
         public Task<Cart> GetCartBYEmail(string email);
         public Task<Cart> ClearCart(string email);
-        public Task<IEnumerable<CartItem>> GetCartItem(string email);
+        public Task<IEnumerable<CartItem>> GetCartItemsByEmail(string email);
         public Task UpdateCount(ICollection<CartItem> items);
     }
 }

@@ -41,7 +41,7 @@ namespace Ecommerce_platforms.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brands", (string)null);
+                    b.ToTable("Brands");
                 });
 
             modelBuilder.Entity("Ecommerce_platforms.Core.Models.Cart", b =>
@@ -52,28 +52,16 @@ namespace Ecommerce_platforms.Repository.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ClientSecret")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("DeliveryMethodId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PaymentIntentId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal?>("ShippingPrice")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Carts", (string)null);
+                    b.ToTable("Carts");
                 });
 
             modelBuilder.Entity("Ecommerce_platforms.Core.Models.CartItem", b =>
@@ -108,7 +96,7 @@ namespace Ecommerce_platforms.Repository.Migrations
 
                     b.HasIndex("CartId");
 
-                    b.ToTable("CartItems", (string)null);
+                    b.ToTable("CartItems");
                 });
 
             modelBuilder.Entity("Ecommerce_platforms.Core.Models.DeliveryMethod", b =>
@@ -136,7 +124,7 @@ namespace Ecommerce_platforms.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DeliveryMethods", (string)null);
+                    b.ToTable("DeliveryMethods");
                 });
 
             modelBuilder.Entity("Ecommerce_platforms.Core.Models.Order", b =>
@@ -147,23 +135,16 @@ namespace Ecommerce_platforms.Repository.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("ClientSecret")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("DeliveryMethodId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Details")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("OrderStatus")
+                        .HasColumnType("int");
 
-                    b.Property<string>("OrderStatus")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserCity")
-                        .IsRequired()
+                    b.Property<string>("PaymentIntentId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserEmail")
@@ -174,7 +155,7 @@ namespace Ecommerce_platforms.Repository.Migrations
 
                     b.HasIndex("DeliveryMethodId");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("Ecommerce_platforms.Core.Models.OrderItems", b =>
@@ -212,7 +193,7 @@ namespace Ecommerce_platforms.Repository.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderItems", (string)null);
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("Ecommerce_platforms.Core.Models.Product", b =>
@@ -250,7 +231,7 @@ namespace Ecommerce_platforms.Repository.Migrations
 
                     b.HasIndex("BrandId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("Ecommerce_platforms.Repository.Data.Identity.AppUser", b =>
@@ -261,17 +242,8 @@ namespace Ecommerce_platforms.Repository.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Details")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -316,9 +288,6 @@ namespace Ecommerce_platforms.Repository.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Street")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -474,40 +443,6 @@ namespace Ecommerce_platforms.Repository.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Ecommerce_platforms.Core.Models.Cart", b =>
-                {
-                    b.OwnsOne("Ecommerce_platforms.Core.Models.Cart.ShippingAddress#Ecommerce_platforms.Core.Models.Address", "ShippingAddress", b1 =>
-                        {
-                            b1.Property<int>("CartId")
-                                .HasColumnType("int");
-
-                            b1.Property<string>("City")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("Detail")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("Name")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("Phone")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.HasKey("CartId");
-
-                            b1.ToTable("Carts", (string)null);
-
-                            b1.WithOwner()
-                                .HasForeignKey("CartId");
-                        });
-
-                    b.Navigation("ShippingAddress");
-                });
-
             modelBuilder.Entity("Ecommerce_platforms.Core.Models.CartItem", b =>
                 {
                     b.HasOne("Ecommerce_platforms.Core.Models.Cart", "Cart")
@@ -525,7 +460,38 @@ namespace Ecommerce_platforms.Repository.Migrations
                         .WithMany("Orders")
                         .HasForeignKey("DeliveryMethodId");
 
+                    b.OwnsOne("Ecommerce_platforms.Core.Models.Address", "ShippingAddress", b1 =>
+                        {
+                            b1.Property<int>("OrderId")
+                                .HasColumnType("int");
+
+                            b1.Property<string>("City")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("Details")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("Name")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("Phone")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.HasKey("OrderId");
+
+                            b1.ToTable("Orders");
+
+                            b1.WithOwner()
+                                .HasForeignKey("OrderId");
+                        });
+
                     b.Navigation("DeliveryMethod");
+
+                    b.Navigation("ShippingAddress");
                 });
 
             modelBuilder.Entity("Ecommerce_platforms.Core.Models.OrderItems", b =>

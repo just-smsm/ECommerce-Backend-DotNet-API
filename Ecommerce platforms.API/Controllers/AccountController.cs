@@ -48,15 +48,24 @@ namespace Ecommerce_platforms.API.Controllers
                 Token = await _auth.CreateToken(user, _userManager)
             });
         }
-
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterUserDTO registerUserDTO)
         {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new
+                {
+                    message = "Invalid input",
+                    errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage)
+                });
+            }
 
             if (await _userManager.FindByEmailAsync(registerUserDTO.Email) != null)
-                return BadRequest("Email has already been registered");
+            {
+                return BadRequest(new { message = "Email is already registered." });
+            }
 
+            // ✅ Ensure ConfirmPassword is checked by ModelState (Handled by [Compare] attribute)
             var user = new AppUser
             {
                 Email = registerUserDTO.Email,
@@ -66,21 +75,27 @@ namespace Ecommerce_platforms.API.Controllers
             };
 
             var createResult = await _userManager.CreateAsync(user, registerUserDTO.Password);
-            if (!createResult.Succeeded) return BadRequest(createResult.Errors.Select(e => e.Description));
-
-            var roleResult = await _userManager.AddToRoleAsync(user, "User");
-            if (!roleResult.Succeeded) return BadRequest(roleResult.Errors.Select(e => e.Description));
-
-            var roles = await _userManager.GetRolesAsync(user);
-            return Ok(new RegisterResponseDTO
+            if (!createResult.Succeeded)
             {
-                Message = "User Registered Successfully",
-                DisplayName = user.FName + " " + user.LName,
-                Email = user.Email,
-                RoleName = roles.FirstOrDefault() ?? "No Role",
-                Token = await _auth.CreateToken(user, _userManager)
+                return BadRequest(new
+                {
+                    message = "User creation failed",
+                    errors = createResult.Errors.Select(e => e.Description)
+                });
+            }
+
+            await _userManager.AddToRoleAsync(user, "User");
+
+            var token = await _auth.CreateToken(user, _userManager);
+            return Ok(new
+            {
+                message = "User registered successfully",
+                displayName = $"{user.FName} {user.LName}",
+                email = user.Email,
+                token
             });
         }
+
         [HttpPost("assign-role")]
         public async Task<IActionResult> AssignRoleToUser([FromHeader(Name = "Authorization")] string authorizationHeader, [FromBody] AssignRoleDTO assignRoleDTO)
         {
@@ -122,24 +137,6 @@ namespace Ecommerce_platforms.API.Controllers
             return Ok("Role assigned successfully");
         }
 
-        //[Authorize]
-        //[HttpPut("update-address")]
-        //public async Task<IActionResult> UpdateUserAddress([FromBody] IdentityAddressDTO addressDTO)
-        //{
-        //    if (!ModelState.IsValid) return BadRequest(ModelState);
-
-        //    var email = User.FindFirstValue(ClaimTypes.Email);
-        //    if (string.IsNullOrEmpty(email)) return BadRequest("User email not found in claims");
-
-        //    var user = await _userManager.FindByEmailAsync(email);
-        //    if (user == null) return BadRequest("Invalid user");
-
-        //    _mapper.Map(addressDTO, user);
-        //    var updateResult = await _userManager.UpdateAsync(user);
-
-        //    if (!updateResult.Succeeded) return BadRequest("Failed to update address");
-
-        //    return Ok("Address updated successfully");
-        //}
+        
     }
 }

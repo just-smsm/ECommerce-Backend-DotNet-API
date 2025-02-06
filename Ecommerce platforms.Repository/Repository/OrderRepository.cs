@@ -20,7 +20,7 @@ namespace Ecommerce_platforms.Repository.Repository
             var existingOrder = await _context.Orders.FirstOrDefaultAsync(o => o.Id == orderId);
             if (existingOrder != null)
             {
-                existingOrder.OrderStatus = SD.Delivered;
+                existingOrder.OrderStatus = OrderStatus.Delivered;
 
                 // Update DeliveryMethodId only if a valid one is provided
                 if (deliveryMethodId.HasValue)
@@ -38,15 +38,24 @@ namespace Ecommerce_platforms.Repository.Repository
         public Task<List<Order>> GetAllOrdersWithPendingDeliveryAsync()
         {
             return _context.Orders
-                           .Where(o => o.OrderStatus != SD.Delivered)
+                           .Where(o => o.OrderStatus != OrderStatus.Delivered)
                            .ToListAsync();
         }
 
         public Task<List<Order>> GetAllOrdersWithDeliveryAsync()
         {
             return _context.Orders
-                           .Where(o => o.OrderStatus == SD.Delivered)
+                           .Where(o => o.OrderStatus == OrderStatus.Delivered)
                            .ToListAsync();
         }
+
+        public async Task<Order> GetOrderWithOrderItems(int orderId)
+        {
+            return await _context.Orders
+                .Include(o => o.OrderItems) // ✅ Include related items
+                .Include(o => o.ShippingAddress) // ✅ Ensure shipping address is loaded
+                .FirstOrDefaultAsync(o => o.Id == orderId);
+        }
+
     }
 }

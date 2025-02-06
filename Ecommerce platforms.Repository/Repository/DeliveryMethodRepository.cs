@@ -2,6 +2,7 @@
 using Ecommerce_platforms.Core.Models;
 using Ecommerce_platforms.Repository.Data;
 using ElSory.Repository.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,13 @@ namespace Ecommerce_platforms.Repository.Repository
         public DeliveryMethodRepository(ApplicationDbContext context) : base(context)
         {
         }
+
+        public async Task<DeliveryMethod> GetDeliveryMethodAsync(int deliveryMethodId)
+        {
+            return await _context.DeliveryMethods
+                .FirstOrDefaultAsync(d => d.Id == deliveryMethodId);
+        }
+
+
     }
 }

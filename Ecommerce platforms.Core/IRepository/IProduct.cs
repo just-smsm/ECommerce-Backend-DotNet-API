@@ -12,5 +12,6 @@ namespace Ecommerce_platforms.Core.IRepository
 
         public  Task<IEnumerable<Product>> GetAllProductsWithPictures();
         public Task<Product> GetAllProductWithPictures(int id);
+        public Task<ICollection<Product>> productsOnspecificBrands(int brandID);
     }
 }

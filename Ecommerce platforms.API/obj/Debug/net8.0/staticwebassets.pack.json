@@ -1,96 +1,120 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\11.jpg",
-      "PackagePath": "staticwebassets\\images\\11.jpg"
+      "Id": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\Brands\\1108dba7-22a6-486d-b0bf-f785430f102b.jpg",
+      "PackagePath": "staticwebassets\\images\\Brands\\1108dba7-22a6-486d-b0bf-f785430f102b.jpg"
     },
     {
-      "Id": "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\12.jpg",
-      "PackagePath": "staticwebassets\\images\\12.jpg"
+      "Id": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\Brands\\1d5481f7-1bba-4eb2-85d2-3272901cb702.jpg",
+      "PackagePath": "staticwebassets\\images\\Brands\\1d5481f7-1bba-4eb2-85d2-3272901cb702.jpg"
     },
     {
-      "Id": "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\13.jpg",
-      "PackagePath": "staticwebassets\\images\\13.jpg"
+      "Id": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\Brands\\38b90bce-6dbf-41b1-9c41-3362645e1fd0.jpg",
+      "PackagePath": "staticwebassets\\images\\Brands\\38b90bce-6dbf-41b1-9c41-3362645e1fd0.jpg"
     },
     {
-      "Id": "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\13promax.jpg",
-      "PackagePath": "staticwebassets\\images\\13promax.jpg"
+      "Id": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\Brands\\5105c5f9-b3a7-4c84-8306-ed5915563903.jpg",
+      "PackagePath": "staticwebassets\\images\\Brands\\5105c5f9-b3a7-4c84-8306-ed5915563903.jpg"
     },
     {
-      "Id": "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\14.jpg",
-      "PackagePath": "staticwebassets\\images\\14.jpg"
+      "Id": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\Brands\\8096c153-1646-4720-8b10-43a219f9d04e.jpg",
+      "PackagePath": "staticwebassets\\images\\Brands\\8096c153-1646-4720-8b10-43a219f9d04e.jpg"
     },
     {
-      "Id": "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\14plus.jpg",
-      "PackagePath": "staticwebassets\\images\\14plus.jpg"
+      "Id": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\Brands\\9f682375-aa9c-455e-980e-1b3f55c5916c.jpg",
+      "PackagePath": "staticwebassets\\images\\Brands\\9f682375-aa9c-455e-980e-1b3f55c5916c.jpg"
     },
     {
-      "Id": "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\14promax.jpg",
-      "PackagePath": "staticwebassets\\images\\14promax.jpg"
+      "Id": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\Brands\\a7826451-f23f-44dd-9740-c25e94f67be2.jpg",
+      "PackagePath": "staticwebassets\\images\\Brands\\a7826451-f23f-44dd-9740-c25e94f67be2.jpg"
     },
     {
-      "Id": "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\15.jpg",
-      "PackagePath": "staticwebassets\\images\\15.jpg"
+      "Id": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\Brands\\fb56f47e-8fb7-4342-983d-8c29c0b04f53.jpg",
+      "PackagePath": "staticwebassets\\images\\Brands\\fb56f47e-8fb7-4342-983d-8c29c0b04f53.jpg"
     },
     {
-      "Id": "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\15promax.jpg",
-      "PackagePath": "staticwebassets\\images\\15promax.jpg"
+      "Id": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\Products\\01e81757-a773-4d69-b89e-4352b591d34f.jpg",
+      "PackagePath": "staticwebassets\\images\\Products\\01e81757-a773-4d69-b89e-4352b591d34f.jpg"
     },
     {
-      "Id": "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\Ipones.jpg",
-      "PackagePath": "staticwebassets\\images\\Ipones.jpg"
+      "Id": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\Products\\0d0dfe22-3015-4d8e-acea-f6cae4c11a0b.jpg",
+      "PackagePath": "staticwebassets\\images\\Products\\0d0dfe22-3015-4d8e-acea-f6cae4c11a0b.jpg"
     },
     {
-      "Id": "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\a05s.jpg",
-      "PackagePath": "staticwebassets\\images\\a05s.jpg"
+      "Id": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\Products\\26034700-0d85-4a0b-ace7-beb5eb715748.jpg",
+      "PackagePath": "staticwebassets\\images\\Products\\26034700-0d85-4a0b-ace7-beb5eb715748.jpg"
     },
     {
-      "Id": "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\a15.jpg",
-      "PackagePath": "staticwebassets\\images\\a15.jpg"
+      "Id": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\Products\\315dabce-6ea3-443e-aa7d-db6489d40ee6.jpg",
+      "PackagePath": "staticwebassets\\images\\Products\\315dabce-6ea3-443e-aa7d-db6489d40ee6.jpg"
     },
     {
-      "Id": "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\a55.jpg",
-      "PackagePath": "staticwebassets\\images\\a55.jpg"
+      "Id": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\Products\\32961d00-4e6b-40ed-9195-593c18213af7.jpg",
+      "PackagePath": "staticwebassets\\images\\Products\\32961d00-4e6b-40ed-9195-593c18213af7.jpg"
     },
     {
-      "Id": "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\avatar5.png",
-      "PackagePath": "staticwebassets\\images\\avatar5.png"
+      "Id": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\Products\\33f693b0-bdcf-431c-ba04-23d0b08b8cf6.jpg",
+      "PackagePath": "staticwebassets\\images\\Products\\33f693b0-bdcf-431c-ba04-23d0b08b8cf6.jpg"
     },
     {
-      "Id": "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\logo.png",
-      "PackagePath": "staticwebassets\\images\\logo.png"
+      "Id": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\Products\\45b169c2-ec7a-42a0-8935-6727d104dca0.jpg",
+      "PackagePath": "staticwebassets\\images\\Products\\45b169c2-ec7a-42a0-8935-6727d104dca0.jpg"
     },
     {
-      "Id": "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\oppo.jpg",
-      "PackagePath": "staticwebassets\\images\\oppo.jpg"
+      "Id": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\Products\\4fdf9e2d-bd67-45f8-9c6b-6d7b64f2a53e.jpg",
+      "PackagePath": "staticwebassets\\images\\Products\\4fdf9e2d-bd67-45f8-9c6b-6d7b64f2a53e.jpg"
     },
     {
-      "Id": "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\oppo13c.jpg",
-      "PackagePath": "staticwebassets\\images\\oppo13c.jpg"
+      "Id": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\Products\\530a1056-1ba7-459d-a21c-ab3afa1e22ac.jpg",
+      "PackagePath": "staticwebassets\\images\\Products\\530a1056-1ba7-459d-a21c-ab3afa1e22ac.jpg"
     },
     {
-      "Id": "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\oppoy03.jpg",
-      "PackagePath": "staticwebassets\\images\\oppoy03.jpg"
+      "Id": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\Products\\61f5245d-74fa-4a16-9860-2acf89259bcd.jpg",
+      "PackagePath": "staticwebassets\\images\\Products\\61f5245d-74fa-4a16-9860-2acf89259bcd.jpg"
     },
     {
-      "Id": "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\reno6.jpg",
-      "PackagePath": "staticwebassets\\images\\reno6.jpg"
+      "Id": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\Products\\78254eb7-2460-4c5e-8e3d-aa8efc3fdb5e.jpg",
+      "PackagePath": "staticwebassets\\images\\Products\\78254eb7-2460-4c5e-8e3d-aa8efc3fdb5e.jpg"
     },
     {
-      "Id": "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\reno7.jpg",
-      "PackagePath": "staticwebassets\\images\\reno7.jpg"
+      "Id": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\Products\\799d4609-fc85-4086-96ce-75df9511989d.jpg",
+      "PackagePath": "staticwebassets\\images\\Products\\799d4609-fc85-4086-96ce-75df9511989d.jpg"
     },
     {
-      "Id": "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\reno8t.jpg",
-      "PackagePath": "staticwebassets\\images\\reno8t.jpg"
+      "Id": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\Products\\7cb90cb7-40c1-4512-a598-efd1f9eab9a3.jpg",
+      "PackagePath": "staticwebassets\\images\\Products\\7cb90cb7-40c1-4512-a598-efd1f9eab9a3.jpg"
     },
     {
-      "Id": "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\s23.jpg",
-      "PackagePath": "staticwebassets\\images\\s23.jpg"
+      "Id": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\Products\\94a8d5fc-15e6-4c71-9b49-988b2467b99d.jpg",
+      "PackagePath": "staticwebassets\\images\\Products\\94a8d5fc-15e6-4c71-9b49-988b2467b99d.jpg"
     },
     {
-      "Id": "C:\\Users\\alQsa\\source\\repos\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\sumsung.jpg",
-      "PackagePath": "staticwebassets\\images\\sumsung.jpg"
+      "Id": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\Products\\9c5f419f-fe26-4fd4-8523-8719b30292db.jpg",
+      "PackagePath": "staticwebassets\\images\\Products\\9c5f419f-fe26-4fd4-8523-8719b30292db.jpg"
+    },
+    {
+      "Id": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\Products\\a5e65e62-e1b1-4b3c-a767-bd6b713070d2.jpg",
+      "PackagePath": "staticwebassets\\images\\Products\\a5e65e62-e1b1-4b3c-a767-bd6b713070d2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\Products\\b1d106a1-7087-4005-b981-c36b93183fed.jpg",
+      "PackagePath": "staticwebassets\\images\\Products\\b1d106a1-7087-4005-b981-c36b93183fed.jpg"
+    },
+    {
+      "Id": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\Products\\b6dfbc18-61a9-41ac-9c18-bd20a70a03de.jpg",
+      "PackagePath": "staticwebassets\\images\\Products\\b6dfbc18-61a9-41ac-9c18-bd20a70a03de.jpg"
+    },
+    {
+      "Id": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\Products\\bd69a064-eda5-4f4a-91d6-77b2fbb8ba43.jpg",
+      "PackagePath": "staticwebassets\\images\\Products\\bd69a064-eda5-4f4a-91d6-77b2fbb8ba43.jpg"
+    },
+    {
+      "Id": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\Products\\c8b2bb1e-9be5-4c12-a659-17d0c9e52526.jpg",
+      "PackagePath": "staticwebassets\\images\\Products\\c8b2bb1e-9be5-4c12-a659-17d0c9e52526.jpg"
+    },
+    {
+      "Id": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\Products\\c97ffda2-d143-4f82-a2a5-2daac7e84878.jpg",
+      "PackagePath": "staticwebassets\\images\\Products\\c97ffda2-d143-4f82-a2a5-2daac7e84878.jpg"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Ecommerce platforms.API.Microsoft.AspNetCore.StaticWebAssets.props",
