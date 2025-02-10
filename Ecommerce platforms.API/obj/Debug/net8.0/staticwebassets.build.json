@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "tZtnWwgqU4G0Fmt/Db3RFlFkOrzQS/h9mEdmJJj7mto=",
+  "Hash": "8B//8EtNIZlEsGwy/ltxUbtGQhQ1qfaOM87J9ivpnI0=",
   "Source": "Ecommerce platforms.API",
   "BasePath": "_content/Ecommerce platforms.API",
   "Mode": "Default",
@@ -72,6 +72,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\Brands\\38b90bce-6dbf-41b1-9c41-3362645e1fd0.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\Brands\\46bfb727-de52-4dca-b059-6bf9858d5116.jpg",
+      "SourceId": "Ecommerce platforms.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\",
+      "BasePath": "_content/Ecommerce platforms.API",
+      "RelativePath": "images/Brands/46bfb727-de52-4dca-b059-6bf9858d5116.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\Brands\\46bfb727-de52-4dca-b059-6bf9858d5116.jpg"
     },
     {
       "Identity": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\Brands\\5105c5f9-b3a7-4c84-8306-ed5915563903.jpg",
@@ -414,6 +433,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\Products\\7cb90cb7-40c1-4512-a598-efd1f9eab9a3.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\Products\\8fa4d99a-6fbc-4ac2-9a1d-f8868a975060.jpg",
+      "SourceId": "Ecommerce platforms.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\",
+      "BasePath": "_content/Ecommerce platforms.API",
+      "RelativePath": "images/Products/8fa4d99a-6fbc-4ac2-9a1d-f8868a975060.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\Products\\8fa4d99a-6fbc-4ac2-9a1d-f8868a975060.jpg"
     },
     {
       "Identity": "C:\\Users\\alQsa\\source\\Ecommerce\\Ecommerce platforms\\Ecommerce platforms.API\\wwwroot\\images\\Products\\94a8d5fc-15e6-4c71-9b49-988b2467b99d.jpg",

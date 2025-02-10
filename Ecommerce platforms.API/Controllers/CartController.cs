@@ -185,10 +185,11 @@ namespace Ecommerce_platforms.API.Controllers
             _logger.LogInformation($"Stripe session created: Session ID: {session.Id}, PaymentIntentId: {order.PaymentIntentId}");
 
             await _unitOfWork.Complete();
-
+            await _unitOfWork.Cart.UpdateCount(cart.Items);
             // Clear cart after successful order creation
             cart.Items.Clear();
             cart.TotalPrice = 0;
+
             await _unitOfWork.Complete();
 
             return Ok(new { sessionUrl = session.Url });

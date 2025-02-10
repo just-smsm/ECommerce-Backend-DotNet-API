@@ -131,15 +131,32 @@ namespace Ecommerce_platforms.Repository.Repository
         }
         public async Task UpdateCount(ICollection<CartItem> items)
         {
-            foreach (var item in items)
+            using var transaction = await _context.Database.BeginTransactionAsync();
+            try
             {
-                var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == item.ProductId);
-                if (product != null)
+                var productIds = items.Select(i => i.ProductId).ToList();
+                var products = await _context.Products.Where(p => productIds.Contains(p.Id)).ToListAsync();
+
+                foreach (var item in items)
                 {
+                    var product = products.FirstOrDefault(p => p.Id == item.ProductId);
+                    if (product == null)
+                        throw new InvalidOperationException($"Product with ID {item.ProductId} not found.");
+
+                    if (product.Count < item.Quantity)
+                        throw new InvalidOperationException($"Not enough stock for product {product.Name}. Available: {product.Count}, Requested: {item.Quantity}");
+
                     product.Count -= item.Quantity;
                 }
+
+                await _context.SaveChangesAsync(); // Single DB hit for performance
+                await transaction.CommitAsync();
             }
-            await _context.SaveChangesAsync();
+            catch
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
         }
 
         public async Task<IEnumerable<CartItem>> GetCartItemsByEmail(string email)
